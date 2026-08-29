@@ -5,6 +5,65 @@ const spaceType = ref('')
 const sunlight = ref('')
 const plantingArea = ref(null)
 const errorMessage = ref('')
+const results = ref([])
+const searched = ref(false)
+
+const plants = [
+  {
+    id: 1,
+    name: 'Common Correa',
+    type: 'Shrub',
+    sunlight: ['partial', 'shade'],
+    spaces: ['balcony', 'courtyard', 'garden'],
+    minArea: 1,
+    wildlife: 'Birds and bees'
+  },
+  {
+    id: 2,
+    name: 'Kangaroo Grass',
+    type: 'Grass',
+    sunlight: ['full', 'partial'],
+    spaces: ['courtyard', 'garden'],
+    minArea: 2,
+    wildlife: 'Butterflies and insects'
+  },
+  {
+    id: 3,
+    name: 'Native Violet',
+    type: 'Groundcover',
+    sunlight: ['partial', 'shade'],
+    spaces: ['balcony', 'courtyard', 'garden'],
+    minArea: 1,
+    wildlife: 'Bees and small insects'
+  },
+  {
+    id: 4,
+    name: 'Grevillea',
+    type: 'Shrub',
+    sunlight: ['full'],
+    spaces: ['courtyard', 'garden'],
+    minArea: 3,
+    wildlife: 'Native birds and bees'
+  },
+  {
+    id: 5,
+    name: 'Bottlebrush',
+    type: 'Shrub',
+    sunlight: ['full', 'partial'],
+    spaces: ['garden'],
+    minArea: 5,
+    wildlife: 'Birds, bees and butterflies'
+  },
+  {
+    id: 6,
+    name: 'Dianella',
+    type: 'Native grass',
+    sunlight: ['full', 'partial', 'shade'],
+    spaces: ['balcony', 'courtyard', 'garden'],
+    minArea: 1,
+    wildlife: 'Birds and insects'
+  }
+]
 
 const submitSpaceQuiz = () => {
   if (spaceType.value === '') {
@@ -27,6 +86,7 @@ const submitSpaceQuiz = () => {
   console.log('Space type:', spaceType.value)
   console.log('Sunlight:', sunlight.value)
   console.log('Planting area:', plantingArea.value)
+  console.log('Plant data:', plants)
 }
 </script>
 
