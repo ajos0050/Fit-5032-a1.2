@@ -66,6 +66,8 @@ const plants = [
 ]
 
 const submitSpaceQuiz = () => {
+  searched.value = false
+
   if (spaceType.value === '') {
     errorMessage.value = 'Please select a space type.'
     return
@@ -83,10 +85,15 @@ const submitSpaceQuiz = () => {
 
   errorMessage.value = ''
 
-  console.log('Space type:', spaceType.value)
-  console.log('Sunlight:', sunlight.value)
-  console.log('Planting area:', plantingArea.value)
-  console.log('Plant data:', plants)
+  results.value = plants.filter((plant) => {
+    return (
+      plant.spaces.includes(spaceType.value) &&
+      plant.sunlight.includes(sunlight.value) &&
+      plantingArea.value >= plant.minArea
+    )
+  })
+
+  searched.value = true
 }
 </script>
 
@@ -240,6 +247,56 @@ const submitSpaceQuiz = () => {
                   </form>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div v-if="searched" class="mt-5">
+            <div class="text-center mb-4">
+              <h2 class="fw-bold">
+                Recommended Plants
+              </h2>
+
+              <p class="text-muted">
+                Plants that match your space and growing conditions.
+              </p>
+            </div>
+
+            <div v-if="results.length > 0" class="row g-4">
+              <div
+                v-for="plant in results"
+                :key="plant.id"
+                class="col-12 col-md-6 col-lg-4"
+              >
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <h3 class="h5 fw-bold text-success">
+                      {{ plant.name }}
+                    </h3>
+
+                    <p>
+                      <strong>Type:</strong>
+                      {{ plant.type }}
+                    </p>
+
+                    <p>
+                      <strong>Minimum area:</strong>
+                      {{ plant.minArea }} m²
+                    </p>
+
+                    <p>
+                      <strong>Supports:</strong>
+                      {{ plant.wildlife }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              v-else
+              class="alert alert-warning text-center"
+            >
+              No plants matched your conditions. Try different options.
             </div>
           </div>
         </div>
